@@ -6,11 +6,14 @@ class User
     @username = username
   end
 
+  def username=(username)
+    raise ArgumentError, "Name cannot be empty" if username.to_s.strip.empty?
+    @username = username
+  end
 end
 
-begin
-  user1 = User.new('')
-    raise ArgumentError.new, "Name cannot be empty or null" if @username.to_s.empty?
-rescue ArgumentError => e
-  puts e.message
-end
+user1 = User.new('willybz1')
+puts user1.username
+user1.username = 'Hello world'
+puts user1.username
+user1.username = '' #Raises argument error.
